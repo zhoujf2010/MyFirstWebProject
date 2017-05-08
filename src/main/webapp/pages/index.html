@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<metacharset="UTF-8">
+</head>
+<body>
+	Hello World
+
+	<input type="button" value="test" onclick="fun1()" />
+	<input id="name" type="input" bind="name"/>
+	<input id="age" type="input" bind="age"/>
+	<input  type="input" bind="name"/>
+
+
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/frame.js"></script>
+	<script>
+
+		function fun1() {
+			epoint.execute("com.zjf.action.indexAction","fun1",function(data){
+				alert(data.name);
+			});
+			
+		}
+	</script>
+
+
+</body>
+</html>
