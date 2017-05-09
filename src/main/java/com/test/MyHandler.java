@@ -5,9 +5,9 @@ import java.lang.reflect.Method;
 
 public class MyHandler implements InvocationHandler
 {
-    private final IUserService original;
+    private final Object original;
 
-    public MyHandler(IUserService original) {
+    public MyHandler(Object original) {
         this.original = original;
     }
 
