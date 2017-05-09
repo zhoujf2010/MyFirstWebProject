@@ -25,13 +25,20 @@ public class CommFactory
         try {
             Object val = map.get(Name).newInstance();
 
-            for (Field fd : map.get(Name).getFields()) {
+            for (Field fd : map.get(Name).getDeclaredFields()) {
                 Object ann = fd.getAnnotation(Autowired.class);
                 if (ann != null) {
                     Object fdval = Create(fd.getName());
+                    fd.setAccessible(true);
                     fd.set(val, fdval);
                 }
             }
+
+            
+//            //Handle示例
+//            val = Proxy.newProxyInstance(CommFactory.class.getClassLoader(), new Class[] {map.get(Name) },
+//                    new MyHandler(val));
+            
             return (T) val;
         }
         catch (InstantiationException | IllegalAccessException e) {
