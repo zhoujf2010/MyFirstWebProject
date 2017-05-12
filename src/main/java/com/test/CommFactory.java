@@ -26,7 +26,7 @@ public class CommFactory
             Object val = map.get(Name).newInstance();
 
             for (Field fd : map.get(Name).getDeclaredFields()) {
-                Object ann = fd.getAnnotation(Autowired.class);
+                Object ann = fd.getAnnotation(MyAutowired.class);
                 if (ann != null) {
                     Object fdval = Create(fd.getName());
                     fd.setAccessible(true);

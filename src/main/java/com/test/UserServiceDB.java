@@ -4,7 +4,7 @@ package com.test;
 public class UserServiceDB implements IUserService
 {
 
-    @Autowired
+    @MyAutowired
     private IConfigService configService;
     
     public String getDisplayName(String UserGuid){
