@@ -8,6 +8,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.test.IConfigService;
+
 public class MyServlet extends HttpServlet
 {
     private static final long serialVersionUID = -6631477864752617453L;
@@ -18,23 +23,23 @@ public class MyServlet extends HttpServlet
         String cmd = hreq.getParameter("cmd");
         String url = hreq.getRequestURI();
         url = url.substring(url.lastIndexOf("/") + 1);
-        String classname = url.substring(0, url.length()-".action".length());
+        String actionName = url.substring(0, url.length()-".action".length());
 
         // 反射类
         String ret = "";
         try {
-            Class cls = Class.forName(classname);
-            Object obj = cls.newInstance();
+            
+            Object obj = SpringContextUtil.getContext().getBean(actionName);
+            System.out.println(obj.hashCode());
 
-//            Object obj = BeanFactiory.getinstance(classname);
-//
-//            Object obj2 = BeanFactiory.getinstance(classname);
-
-            Object val = cls.getMethod(cmd).invoke(obj);
+            Object obj2 = SpringContextUtil.getContext().getBean(actionName);
+            System.out.println(obj2.hashCode());
+            
+            Object val = obj.getClass().getMethod(cmd).invoke(obj);
             if (val != null)
                 ret = val.toString();
         }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
+        catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
         }

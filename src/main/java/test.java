@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.test.IConfigService;
 import com.test.IUserService;
+import com.zjf.common.SpringContextUtil;
 
 public class test
 {
@@ -21,9 +22,12 @@ public class test
 //        service.getDisplayName("");
         
         
+        @SuppressWarnings("resource")
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
         
-        IConfigService svr = (IConfigService)context.getBean("configservice");
+        
+        
+        IConfigService svr = (IConfigService)SpringContextUtil.getContext().getBean("configservice");
         System.out.println(svr.getValue("11"));
         
         IUserService service = (IUserService)context.getBean("userservice");
