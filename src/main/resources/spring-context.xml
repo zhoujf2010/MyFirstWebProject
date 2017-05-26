@@ -13,6 +13,9 @@
 	<bean id="userservice" class="com.test.UserServiceDB">
 		<property name="message" value="Hello World!" />
 	</bean>
+	
+	
+	<bean id="configservice" class="com.test.ConfigService2" />
 
 	<bean id="sprintcontextutil" class="com.zjf.common.SpringContextUtil" />
 

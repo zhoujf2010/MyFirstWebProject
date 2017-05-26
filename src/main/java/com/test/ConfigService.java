@@ -2,7 +2,6 @@ package com.test;
 
 import org.springframework.stereotype.Component;
 
-@Component("configservice")
 public class ConfigService implements IConfigService
 {
 
