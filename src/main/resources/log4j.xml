@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- [控制台日志模板] -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- console 异步日志,开发环境都使用此appender，方便调试 -->
+	<appender name="ASYNC_CONSOLE" class="org.apache.log4j.AsyncAppender">
+		<param name="BufferSize" value="64" />
+		<param name="LocationInfo" value="true" />
+		<appender-ref ref="CONSOLE" />
+	</appender>
+
+	<!-- 默认的异步文件日志输出，生产环境都采用此appender -->
+	<appender name="ASYNC_FILE" class="org.apache.log4j.AsyncAppender">
+		<param name="BufferSize" value="256" />
+		<param name="LocationInfo" value="true" />
+		<appender-ref ref="FILE" />
+	</appender>
+
+	<!-- Root Logger -->
+	<root>
+		<level value="INFO"></level>
+		<appender-ref ref="ASYNC_CONSOLE" />
+		<!-- <appender-ref ref="ASYNC_FILE" /> -->
+	</root>
+</log4j:configuration>
