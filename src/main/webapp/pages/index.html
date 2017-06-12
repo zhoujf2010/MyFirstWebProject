@@ -10,9 +10,17 @@
 	<input id="name" type="input" bind="name"/>
 	<input id="age" type="input" bind="age"/>
 	<input  type="input" bind="name"/>
-
+	
+websocket
+	<br/>
+	<input id="send" type="input"/>
+	<input type="button" value="test" onclick="test()" />
+	<br/>
+	<span id="rec"></span>
+	
 
 	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/atmosphere.js"></script>
 	<script src="js/frame.js"></script>
 	<script>
 
@@ -21,6 +29,28 @@
 				alert(data.name);
 			});
 			
+		}
+		
+		//注册request 
+		var request = {
+			url : "http://localhost:8080/MyFirstWebProject/websocket/test",//WebSocket地址
+			contentType : "application/json",
+			transport : 'websocket',
+			fallbackTransport : 'long-polling',
+			onTransportFailure : function(errorMsg, request) {
+				//浏览器不支持WebSocket的情况下降级为长轮询。
+				request.fallbackTransport = "long-polling";
+				transport = "long-polling";
+			},
+			onMessage : function(response) {
+				var msgStr = response.responseBody;
+				$("#rec").text(msgStr);
+			}
+		};
+		var subSocket = atmosphere.subscribe(request);//建立连接，异步执行
+
+		function test() {
+			subSocket.push($("#send").val());
 		}
 	</script>
 
