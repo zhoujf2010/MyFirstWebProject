@@ -8,11 +8,11 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.zjf.common.SpringContextUtil;
 
-@Component("indexAction")
+@RestController("indexAction")
 @Scope("request")
 public class indexAction
 {

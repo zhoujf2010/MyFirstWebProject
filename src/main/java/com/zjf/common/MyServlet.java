@@ -3,25 +3,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
-import com.test.IConfigService;
-
-public class MyServlet extends HttpServlet
+public class MyServlet extends DispatcherServlet
 {
     private static final long serialVersionUID = -6631477864752617453L;
 
-    public void service(final ServletRequest req, final ServletResponse resp) throws IOException {
+    public void service(final ServletRequest req, final ServletResponse resp) throws IOException, ServletException {
         // 获取url和cmd
         HttpServletRequest hreq = (HttpServletRequest) req;
         String cmd = hreq.getParameter("cmd");
         String url = hreq.getRequestURI();
+        if (url.contains("/rest/")){
+            super.service(req, resp);
+            return;
+        }
+        
         url = url.substring(url.lastIndexOf("/") + 1);
         String actionName = url.substring(0, url.length()-".action".length());
 
