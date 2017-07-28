@@ -1,4 +1,0 @@
-<beans>
-
-	<Scan path="com.epoint"></Scan>
-</beans>
