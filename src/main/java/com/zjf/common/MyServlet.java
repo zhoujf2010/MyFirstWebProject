@@ -17,12 +17,12 @@ public class MyServlet extends DispatcherServlet
     public void service(final ServletRequest req, final ServletResponse resp) throws IOException, ServletException {
         // 获取url和cmd
         HttpServletRequest hreq = (HttpServletRequest) req;
-        String cmd = hreq.getParameter("cmd");
         String url = hreq.getRequestURI();
-        if (url.contains("/rest/")){
+        if (!url.endsWith(".action")){
             super.service(req, resp);
             return;
         }
+        String cmd = hreq.getParameter("cmd");
         
         url = url.substring(url.lastIndexOf("/") + 1);
         String actionName = url.substring(0, url.length()-".action".length());
