@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class UserController {
+public class HelloController {
     
 	@RequestMapping("/showUser")
 	public String toIndex(HttpServletRequest request,Model model){

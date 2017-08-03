@@ -1,11 +1,15 @@
 package com.zjf.weixin;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dom4j.Document;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zjf.test.StringUtil;
-
 @RestController
 @RequestMapping("/weixin")
 public class weixinAction
@@ -31,6 +34,62 @@ public class weixinAction
             pw.write(echoStr);
             pw.close();
         }
+        if (req.getMethod().equals("POST")){
+            InputStream is = req.getInputStream();
+            byte[] bts = ReadStreamByte(is);
+            String ss = new String(bts);
+            System.out.println(ss);
+            ReqEntity entity = ReqEntity.getInstance(bts);
+            String ret = DealMsg(entity);
+            resp.setCharacterEncoding("UTF-8");
+            PrintWriter pw = resp.getWriter();
+            pw.write(ret);
+            pw.close();
+        }
+    }
+    
+    private String DealMsg(ReqEntity entity){
+        String resxml="";
+        resxml = "<xml><ToUserName><![CDATA[" + entity.getFromUserName()
+        + "]]></ToUserName><FromUserName><![CDATA[" + entity.getToUserName()
+        + "]]></FromUserName><CreateTime>" + ConvertDateTimeInt(new Date())
+        + "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[欢迎您,HelloWorld，请通过点击菜单访问平台功能！";
+      resxml += "]]></Content><FuncFlag>0</FuncFlag></xml>";
+      
+        return resxml;
+    }
+    
+    private long ConvertDateTimeInt(Date time)
+    {
+        return time.getTime()/1000;
+    }
+
+    
+    public static byte[] ReadStreamByte(InputStream is) {
+        try {
+            ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
+            int bufsize = 10240;
+            byte[] buff = new byte[bufsize];
+            int rc = 0;
+            while ((rc = is.read(buff, 0, bufsize)) > 0) {
+                swapStream.write(buff, 0, rc);
+            }
+            byte[] in2b = swapStream.toByteArray();
+            return in2b;
+            /*
+             * List<Byte> lst = new ArrayList<Byte>();
+             * 
+             * byte[] buf = new byte[100]; while (true) { int p = is.read(buf,
+             * 0, buf.length); if (p <= 0) break; for (int i = 0; i < p; i++)
+             * lst.add(buf[i]); } byte[] re = new byte[lst.size()]; for (int i =
+             * 0; i < re.length; i++) re[i] = lst.get(i); return re;
+             */
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
     
 //  /// <summary>

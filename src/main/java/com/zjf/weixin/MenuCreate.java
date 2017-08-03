@@ -10,15 +10,18 @@ public class MenuCreate
 {
 
     public static void main(String[] args) throws Exception {
+
+        //1.获取access_token
+        //getToken();//{"access_token":"j5iFE410cGvZNw-r-Sll3gzcYoHIy54h9pKaBh1RsTrW_Nkz26UD2vXJfS9D7Oudfojk58eIasKJR6PyVFmnMFAmub8JMdc4NeUrBfYnShxiVuj-n9tsU6cWbGSBf3JOEDAgACAYXU","expires_in":7200}
+
+
+    
+        //2.创建菜单
         // xxeecddggaawwwd
-        String access_token = "SLzXvHTZjR6CT5VUN0OaTK40cQkkBgOh4MXFscT6JgcARFJs6R2Z8GU834WxFHnrD31xn939A9_QgafW7Zxprm3Efk5gTMUFebXLBUomPNVt2da9w1_vDGom9dH--mC6FUBbAIAZOV";
-        String appid = "wx4656182b513afe08";
-        String backurl = "http://www.demo.com/aa/";
-
-        //获取access_token
-        //getToken();//{"access_token":"SLzXvHTZjR6CT5VUN0OaTK40cQkkBgOh4MXFscT6JgcARFJs6R2Z8GU834WxFHnrD31xn939A9_QgafW7Zxprm3Efk5gTMUFebXLBUomPNVt2da9w1_vDGom9dH--mC6FUBbAIAZOV","expires_in":7200}
-
-        
+        String access_token = "j5iFE410cGvZNw-r-Sll3gzcYoHIy54h9pKaBh1RsTrW_Nkz26UD2vXJfS9D7Oudfojk58eIasKJR6PyVFmnMFAmub8JMdc4NeUrBfYnShxiVuj-n9tsU6cWbGSBf3JOEDAgACAYXU";
+        String appid = "wxaf792784650e9b95";
+        String backurl = "http://172.93.40.179/MyFirstWebProject/weixin";
+    
         String posturl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + access_token;
 
         String urltb = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + backurl
@@ -44,8 +47,8 @@ public class MenuCreate
     }
 
     private static void getToken() throws Exception {
-        String appid = "wx4656182b513afe08";
-        String secret = "89b407b4edf14c7e6b475622c990c49e";
+        String appid = "wxaf792784650e9b95";
+        String secret = "0c9c1281db26a2fa723e8037f39d34b0";
         String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret="
                 + secret;
 
