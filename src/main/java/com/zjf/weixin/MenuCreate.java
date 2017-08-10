@@ -18,14 +18,18 @@ public class MenuCreate
     
         //2.创建菜单
         // xxeecddggaawwwd
-        String access_token = "j5iFE410cGvZNw-r-Sll3gzcYoHIy54h9pKaBh1RsTrW_Nkz26UD2vXJfS9D7Oudfojk58eIasKJR6PyVFmnMFAmub8JMdc4NeUrBfYnShxiVuj-n9tsU6cWbGSBf3JOEDAgACAYXU";
+        String access_token = "C7ad7E1xOlBw73MWscqDh23k7wEZXImx35EDkntiP6FVj10nhUsOHNFq3GucQ7AuODWJCiSQpsI6Xr7P8CPvgjK1ZY4BMCzUbGAakEub5p7eB-g_Pp6F5vxf2LUl5yx7MGKaABADXB";
         String appid = "wxaf792784650e9b95";
-        String backurl = "http://172.93.40.179/MyFirstWebProject/weixin";
+        //String backurl = "http://172.93.40.179/MyFirstWebProject/weixin";
+        String backurl = "http://demo.tobloan.com/MyFirstWebProject/weixin";
+        String urltest = backurl + "/weixininfo";
+        //String urllogin = backurl + "/weixinbind";
+        
     
         String posturl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + access_token;
 
-        String urltb = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + backurl
-                + "Pages/WeiXinLogin.aspx" + "&response_type=code&scope=snsapi_base&state=1STATE#wechat_redirect";
+        String urllogin = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + backurl
+                + "/weixinbind" + "&response_type=code&scope=snsapi_base&state=1STATE#wechat_redirect";
         String urlzx = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + backurl
                 + "Pages/ZhongXinLogin.aspx" + "&response_type=code&scope=snsapi_base&state=1STATE#wechat_redirect";
         String menuStr = "{" + "\"button\":[" + "{\"name\":\"信息查询\",\"sub_button\":["
@@ -35,11 +39,11 @@ public class MenuCreate
                 + "{\"type\":\"click\",\"name\":\"法律法规\",\"key\":\"V001_XXCX_FLFG\"},"
                 + "{\"type\":\"click\",\"name\":\"办事指南\",\"key\":\"V001_XXCX_BSZN\"}]},"
                 + "{\"name\":\"我的投标\",\"sub_button\":["
-                + "{\"type\":\"click\",\"name\":\"投标提醒\",\"key\":\"V001_WDTB_TBTX\"},"
+                + "{\"type\":\"view\",\"name\":\"测试页面2\",\"url\":\"" + urltest + "\"},"
                 + "{\"type\":\"click\",\"name\":\"我的交易\",\"key\":\"V001_WDTB_WDJY\"},"
                 + "{\"type\":\"click\",\"name\":\"今日开标\",\"key\":\"V001_WDTB_JRKB\"},"
                 + "{\"type\":\"click\",\"name\":\"内部通知\",\"key\":\"V001_WDTB_NBTZ\"}]},"
-                + "{\"name\":\"绑定用户\",\"sub_button\":[" + "{\"type\":\"view\",\"name\":\"投标单位登陆\",\"url\":\"" + urltb
+                + "{\"name\":\"绑定用户\",\"sub_button\":[" + "{\"type\":\"view\",\"name\":\"用户绑定\",\"url\":\"" + urllogin
                 + "\"}," + "{\"type\":\"view\",\"name\":\"中心人员登陆\",\"url\":\"" + urlzx + "\"}]}" + "]}";
 
         TestPost(posturl, menuStr.getBytes());
