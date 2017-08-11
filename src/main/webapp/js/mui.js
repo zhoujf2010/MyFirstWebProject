@@ -298,11 +298,13 @@ var mui = (function(document, undefined) {
 	 * @returns {_L8.$}
 	 */
 	$.trigger = function(element, eventType, eventData) {
-//		element.dispatchEvent(new CustomEvent(eventType, {
-//			detail: eventData,
-//			bubbles: true,
-//			cancelable: true
-//		}));
+		try{
+		element.dispatchEvent(new CustomEvent(eventType, {
+			detail: eventData,
+			bubbles: true,
+			cancelable: true
+		}));
+		}catch(e){}
 		return this;
 	};
 	/**

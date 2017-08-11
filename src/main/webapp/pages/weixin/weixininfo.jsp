@@ -56,7 +56,6 @@
 	</div>
 
 	<script src="../js/mui.js"></script>
-	<script src="../js/jquery-1.10.2.js"></script>
 	<script src="../js/frame.js"></script>
 	<script>
 		mui.init({
@@ -64,7 +63,7 @@
 		});
 
 		function fun1() {
-			$.ajax({
+			mui.ajax({
 				type : "post",
 				url : "../weixinAction2/fun1?t=" + Math.random(),
 				data : "{'xxx':'222'}",
