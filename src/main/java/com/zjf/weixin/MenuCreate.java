@@ -14,6 +14,9 @@ public class MenuCreate
         //1.获取access_token
         //getToken();//{"access_token":"j5iFE410cGvZNw-r-Sll3gzcYoHIy54h9pKaBh1RsTrW_Nkz26UD2vXJfS9D7Oudfojk58eIasKJR6PyVFmnMFAmub8JMdc4NeUrBfYnShxiVuj-n9tsU6cWbGSBf3JOEDAgACAYXU","expires_in":7200}
 
+        
+        //https://open.weixin.qq.com/connect/oauth2/authorize?appid=CORPID&redirect_uri=http://app.epoint.com.cn/WeChat/rest/oauth2/OAuth/checkEpointWeichatOauthOpenId?targetUrl=http://app.epoint.com.cn/test/test.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect
+        
 
     
         //2.创建菜单

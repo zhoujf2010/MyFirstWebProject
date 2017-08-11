@@ -32,7 +32,8 @@
 				/weixin/weixinbind.do = anon
 				/**/*.js = anon
 				/**/*.css = anon
-				/** = authc
+				/**/*.ttf = anon
+				/** = anon
 			</value>
 		</property> 
 	</bean>
