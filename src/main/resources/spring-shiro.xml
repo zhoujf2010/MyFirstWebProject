@@ -30,6 +30,7 @@
 				/weixin/weixininfo = anon
 				/weixin/weixinbind = anon
 				/weixin/weixinbind.do = anon
+				/muidemo/** = anon
 				/**/*.js = anon
 				/**/*.css = anon
 				/**/*.ttf = anon

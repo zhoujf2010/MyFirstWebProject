@@ -2244,6 +2244,17 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		}
 		if(!$.os.plus) {
 			//TODO 先临时这么处理：手机上顶层跳，PC上parent跳
+			if (options.extras != null){
+				var i = 0;
+				for(var k in options.extras) {
+					if (i==0)
+						url += "?" + k +"=" + options.extras[k];
+					else
+						url += "&" + k +"=" + options.extras[k];
+					i++;
+			  }  
+			}
+			
 			if($.os.ios || $.os.android) {
 				window.top.location.href = url;
 			} else {

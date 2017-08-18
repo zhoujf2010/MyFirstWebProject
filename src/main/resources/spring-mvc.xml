@@ -13,10 +13,12 @@
 	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
 	<context:component-scan base-package="com.test,com.zjf"> 
  	</context:component-scan>
-
+	
+    <mvc:annotation-driven />
+    
 <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 	</bean>
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -24,6 +26,5 @@
 		<property name="prefix" value="/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
 	
 </beans>
