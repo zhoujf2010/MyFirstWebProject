@@ -10,11 +10,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zjf.common.SpringContextUtil;
 
+//通过连接池，多线程操作
 public class testdb2
 {
 
     public static void main(String[] args) throws Exception {
-        new ClassPathXmlApplicationContext("spring-context.xml");
+        new ClassPathXmlApplicationContext("spring.xml");
         
         for (int i = 0; i < 20; i++) {
             Thread thd = new Thread(new Runnable()

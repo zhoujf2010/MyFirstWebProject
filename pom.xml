@@ -34,12 +34,12 @@
 			<version>5.1.26</version>
 		</dependency>
 
-<!-- 
-		<dependency>
+		<!--
+			<dependency>
 			<groupId>ojdbc</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>14</version>
-		</dependency> -->
+			</dependency> -->
 
 		<dependency>
 			<groupId>log4j</groupId>
@@ -185,6 +185,38 @@
 			<artifactId>shiro-ehcache</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>org.springframework.jdbc</artifactId>
+    <version>3.1.2.RELEASE</version>
+    <exclusions>
+    	<exclusion>
+    		<artifactId>org.springframework.transaction</artifactId>
+    		<groupId>org.springframework</groupId>
+    	</exclusion>
+    	<exclusion>
+    		<artifactId>org.springframework.core</artifactId>
+    		<groupId>org.springframework</groupId>
+    	</exclusion>
+    	<exclusion>
+    		<artifactId>org.springframework.beans</artifactId>
+    		<groupId>org.springframework</groupId>
+    	</exclusion>
+    </exclusions>
+</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

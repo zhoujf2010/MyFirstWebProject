@@ -30,5 +30,25 @@
 	
 	<!--  -->
 		<import resource="spring-shiro.xml" />
+		<import resource="spring-druid.xml" />
+		
+		
+		
+	<!-- mybaties设置 -->
+	<!-- 会话工厂 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/zjf/mybaties/userDao.xml</value>
+			</list>
+		</property>
+		<property name="typeAliasesPackage" value="com.zjf.mybaties">
+		</property>
+	</bean>
+	<!-- Dao的虚拟实现类 -->
+	<bean id="mappingScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.zjf.mybaties"></property>
+	</bean>
 		
 </beans>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjf.mybaties.userDao">
+	<resultMap type="user" id="userlist">
+		<id property="id" column="id" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="age" property="age" />
+		<result column="name" property="name" />
+		<result column="role" property="role" />
+		<result column="email" property="email" />
+		<result property="phone" column="phone" />
+		<!-- <association property="citys" javaType="entity.City">
+			<id property="cityId" column="city_id"/>
+			<result property="cityName" column="city_name"/>
+			<result property="provId" column="prov_id"/>
+			<result property="cityInitials" column="city_initials"/>
+			<result property="cityFull" column="city_full"/>
+			<result property="cityFirst" column="city_first"/>
+			</association> -->
+	</resultMap>
+	<resultMap type="user" id="userlist1">
+		<result property="count" column="cnt" />
+	</resultMap>
+	<select id="select" parameterType="user" resultMap="userlist">
+		select * from user
+		<where>
+			1=1
+			<if test="username!=null and username!=''">
+				and username=#{username}
+			</if>
+		</where>
+		order by username
+	</select>
+	<select id="selectcount" parameterType="user" resultMap="userlist1">
+		SELECT
+		count(*) as cnt from user
+	</select>
+	<select id="getAllUsers" resultType="com.zjf.mybaties.user">
+		select * from user
+	</select>
+	<select id="getcount" resultType="int">
+		select count(*) from user
+	</select>
+	<insert id="insert" parameterType="user">
+		insert into
+		user(username,password) values(#{username},#{password})
+	</insert>
+	<update id="update" parameterType="user">
+		update user
+		<set>
+			<if test="username!=null and username!=''">username=#{username},</if>
+			<if test="password!=null and password!=''">password=#{password},</if>
+		</set>
+		<where>
+			<if test="id!=null and id>0">id=#{id}</if>
+		</where>
+	</update>
+</mapper>
