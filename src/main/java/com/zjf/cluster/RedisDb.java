@@ -138,9 +138,9 @@ public class RedisDb
         String result = "";
         if (jedis != null) {
             try {
-                if (!jedis.exists(key)) {
+                //if (!jedis.exists(key)) {
                     jedis.set(key, value);
-                }
+                //}
                 // redis中session过期时间
                 jedis.expire(key, expireTime);
             }
