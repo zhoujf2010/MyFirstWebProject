@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zjf.mybaties.userDao">
-	<resultMap type="user" id="userlist">
+<mapper namespace="com.zjf.mybaties.UserDao">
+	<resultMap type="User" id="userlist">
 		<id property="id" column="id" />
 		<result column="username" property="username" />
 		<result column="password" property="password" />
@@ -19,34 +19,39 @@
 			<result property="cityFirst" column="city_first"/>
 			</association> -->
 	</resultMap>
-	<resultMap type="user" id="userlist1">
+	<resultMap type="User" id="userlist1">
 		<result property="count" column="cnt" />
 	</resultMap>
-	<select id="select" parameterType="user" resultMap="userlist">
+	<select id="getUser" parameterType="User"  resultType="User">
+         select * from user where 1=1 
+			<if test="username!=null and username!=''">
+			  and username=#{username}
+			  </if>
+     </select>
+
+	<select id="select" parameterType="User" resultMap="userlist">
 		select * from user
 		<where>
 			1=1
-			<if test="username!=null and username!=''">
 				and username=#{username}
-			</if>
 		</where>
 		order by username
 	</select>
-	<select id="selectcount" parameterType="user" resultMap="userlist1">
+	<select id="selectcount" parameterType="User" resultMap="userlist1">
 		SELECT
 		count(*) as cnt from user
 	</select>
-	<select id="getAllUsers" resultType="com.zjf.mybaties.user">
+	<select id="getAllUsers" resultType="com.zjf.mybaties.User">
 		select * from user
 	</select>
 	<select id="getcount" resultType="int">
 		select count(*) from user
 	</select>
-	<insert id="insert" parameterType="user">
+	<insert id="insert" parameterType="User">
 		insert into
 		user(username,password) values(#{username},#{password})
 	</insert>
-	<update id="update" parameterType="user">
+	<update id="update" parameterType="User">
 		update user
 		<set>
 			<if test="username!=null and username!=''">username=#{username},</if>

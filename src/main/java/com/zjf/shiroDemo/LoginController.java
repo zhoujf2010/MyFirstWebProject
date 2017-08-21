@@ -1,9 +1,13 @@
 package com.zjf.shiroDemo;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,6 +26,27 @@ public class LoginController
 {
     @Autowired
     private UserServiceImpl userService;
+    
+    @RequestMapping("/index.do") // url
+    public String loginpage(HttpServletRequest request, HttpServletResponse response, Model model) {
+        
+        HttpSession session = request.getSession();
+        Enumeration<String> names = session.getAttributeNames();
+        System.out.println("----------");
+        while(names.hasMoreElements()){
+            String name = names.nextElement();
+            Object val = session.getAttribute(name);
+            System.out.println(name + ":" + val);
+        }
+        System.out.println("");
+        for(Cookie cook:request.getCookies()){
+            System.out.println(cook.getName() + ":" + cook.getValue());
+        }
+        System.out.println("");
+        System.out.println("");
+        
+        return "/index";// 返回的页面
+    }
 
     @RequestMapping("/dologin.do") // url
     public String dologin(User user, Model model) {

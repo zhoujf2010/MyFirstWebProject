@@ -1,7 +1,13 @@
 package com.zjf.shiroDemo;
 
-public class User
+import java.io.Serializable;
+
+public class User implements Serializable
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8957654899594351835L;
     private String username; // 用户名
     private String password; // 密码
     private String name; // 姓名

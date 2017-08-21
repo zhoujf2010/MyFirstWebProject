@@ -24,6 +24,12 @@
 		<appender-ref ref="FILE" />
 	</appender>
 
+	<!-- sql日志控制器 -->
+	<logger name="druid.sql.Statement">
+		<level value="TRACE" />
+	</logger>
+	
+	
 	<!-- Root Logger -->
 	<root>
 		<level value="INFO"></level>

@@ -18,23 +18,28 @@ public class Test
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         new ClassPathXmlApplicationContext("spring.xml");
-        userDao userdao = (userDao) SpringContextUtil.getContext().getBean(userDao.class);
+        UserDao userdao = (UserDao) SpringContextUtil.getContext().getBean(UserDao.class);
 
-        user u = new user();
-        u.setName("admin");
-        List<user> lst = userdao.select(u);
-        System.out.println(lst.size());
+        User u = new User();
+        u.setUsername("admin");
+//        List<user> lst = userdao.select(u);
+//        System.out.println(lst.size());
+        u = userdao.getUser(u);
 
 
         SqlSessionFactory factory = (SqlSessionFactory) SpringContextUtil.getContext().getBean("sqlSessionFactory");
         SqlSession sqlSession = factory.openSession();
-        String statement = "com.zjf.mybaties.userDao.getAllUsers";
-        List<user> lstUsers = sqlSession.selectList(statement);
-        System.out.println(lstUsers.size());
+        String statement = "com.zjf.mybaties.UserDao.getUser";
+        User user = sqlSession.selectOne(statement, u);
+
         
-        int p = sqlSession.selectOne("com.zjf.mybaties.userDao.getcount");
-        System.out.println("count=" + p);
-        
+//        String statement = "com.zjf.mybaties.userDao.getAllUsers";
+//        List<user> lstUsers = sqlSession.selectList(statement);
+//        System.out.println(lstUsers.size());
+//        
+//        int p = sqlSession.selectOne("com.zjf.mybaties.userDao.getcount");
+//        System.out.println("count=" + p);
+//        
         sqlSession.close();
     }
 

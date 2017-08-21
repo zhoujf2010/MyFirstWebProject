@@ -11,17 +11,16 @@
 		<!-- 登陆成功后的一面 -->
 		<property name="successUrl" value="/pages/success.jsp" />
 		<property name="unauthorizedUrl" value="/pages/unauthorized.jsp" />
-		
+
 		<property name="filters">
-            <map>
-              <entry key="authc">  
-                    <bean  
-                        class="com.zjf.shiroDemo.UserAccessControlFilter" />  
-                </entry>  
-            </map>
-        </property>
-		
-		<!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截.-->
+			<map>
+				<entry key="authc">
+					<bean class="com.zjf.shiroDemo.UserAccessControlFilter" />
+				</entry>
+			</map>
+		</property>
+
+		<!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截. -->
 		<property name="filterChainDefinitions">
 			<value>
 				/index.jsp = anon
@@ -36,7 +35,7 @@
 				/**/*.ttf = anon
 				/** = anon
 			</value>
-		</property> 
+		</property>
 	</bean>
 
 	<!-- 配置缓存管理器 -->
@@ -53,9 +52,24 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="cacheManager" ref="cacheManager" />
 		<property name="realm" ref="myRealm" />
-		<property name="sessionMode" value="native">
-		</property>
+		<!-- <property name="sessionMode" value="native"></property> -->
+		<property name="sessionManager" ref="sessionManager" />  
+		
 	</bean>
 	<!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- custom shiro session listener -->
+	<bean id="customShiroSessionDAO" class="com.zjf.cluster.SessionRedisDao">
+	</bean>
+
+	<!-- Session Manager -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- 相隔多久检查一次session的有效性 -->
+		<property name="sessionValidationInterval" value="1800000" />
+		<!-- session 有效时间为半小时 （毫秒单位） -->
+		<property name="globalSessionTimeout" value="1800000" />
+		<property name="sessionDAO" ref="customShiroSessionDAO" />
+	</bean>
 </beans>  

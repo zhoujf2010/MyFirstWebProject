@@ -27,11 +27,11 @@
 </table>
 </form>
 <script type="text/javascript">
- $(function(){
-    $("#registerBtn").click(function(event){
-        window.location = "../jsp/register.jsp";
-    });
-  });
+ //$(function(){
+  //  $("#registerBtn").click(function(event){
+  //      window.location = "../jsp/register.jsp";
+ //  });
+ // });
 </script>
 </body>
 </html>
