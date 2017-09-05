@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="../bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
+<link href="../bootstrap-3.3.7/plugins/dataTables/bootstrap-table.css" rel="stylesheet">
+
+</head>
+<body>
+	<table id="table">
+		<thead>
+			<tr>
+				<th data-field="name">Name</th>
+				<th data-field="stargazers_count">Stars</th>
+				<th data-field="forks_count">Forks</th>
+				<th data-field="description">Description</th>
+			</tr>
+		</thead>
+	</table>
+	<script src="../js/jquery-1.10.2.js"></script>
+	<script src="../bootstrap-3.3.7/js/bootstrap.js"></script>
+	<script src="../bootstrap-3.3.7/plugins/dataTables/bootstrap-table.js"></script>
+	<script>
+		$(document).ready(function() {
+			var data = [ {
+				"name" : "bootstrap-table",
+				"stargazers_count" : "526",
+				"forks_count" : "122",
+				"description" : "An extended Bootstrap table with radio, checkbox, sort, pagination, and other added features. (supports twitter bootstrap v2 and v3) "
+			}, {
+				"name" : "multiple-select",
+				"stargazers_count" : "288",
+				"forks_count" : "150",
+				"description" : "A jQuery plugin to select multiple elements with checkboxes :)"
+			}, {
+				"name" : "bootstrap-show-password",
+				"stargazers_count" : "32",
+				"forks_count" : "11",
+				"description" : "Show/hide password plugin for twitter bootstrap."
+			}, {
+				"name" : "blog",
+				"stargazers_count" : "13",
+				"forks_count" : "4",
+				"description" : "my blog"
+			}, {
+				"name" : "scutech-redmine",
+				"stargazers_count" : "6",
+				"forks_count" : "3",
+				"description" : "Redmine notification tools for chrome extension."
+			} , {
+				"name" : "multiple-select",
+				"stargazers_count" : "288",
+				"forks_count" : "150",
+				"description" : "A jQuery plugin to select multiple elements with checkboxes :)"
+			}, {
+				"name" : "bootstrap-show-password",
+				"stargazers_count" : "32",
+				"forks_count" : "11",
+				"description" : "Show/hide password plugin for twitter bootstrap."
+			}, {
+				"name" : "blog",
+				"stargazers_count" : "13",
+				"forks_count" : "4",
+				"description" : "my blog"
+			}, {
+				"name" : "scutech-redmine",
+				"stargazers_count" : "6",
+				"forks_count" : "3",
+				"description" : "Redmine notification tools for chrome extension."
+			}, {
+				"name" : "multiple-select",
+				"stargazers_count" : "288",
+				"forks_count" : "150",
+				"description" : "A jQuery plugin to select multiple elements with checkboxes :)"
+			}, {
+				"name" : "bootstrap-show-password",
+				"stargazers_count" : "32",
+				"forks_count" : "11",
+				"description" : "Show/hide password plugin for twitter bootstrap."
+			}, {
+				"name" : "blog",
+				"stargazers_count" : "13",
+				"forks_count" : "4",
+				"description" : "my blog"
+			}, {
+				"name" : "scutech-redmine",
+				"stargazers_count" : "6",
+				"forks_count" : "3",
+				"description" : "Redmine notification tools for chrome extension."
+			}, {
+				"name" : "multiple-select",
+				"stargazers_count" : "288",
+				"forks_count" : "150",
+				"description" : "A jQuery plugin to select multiple elements with checkboxes :)"
+			}, {
+				"name" : "bootstrap-show-password",
+				"stargazers_count" : "32",
+				"forks_count" : "11",
+				"description" : "Show/hide password plugin for twitter bootstrap."
+			}, {
+				"name" : "blog",
+				"stargazers_count" : "13",
+				"forks_count" : "4",
+				"description" : "my blog"
+			}, {
+				"name" : "scutech-redmine",
+				"stargazers_count" : "6",
+				"forks_count" : "3",
+				"description" : "Redmine notification tools for chrome extension."
+			}, {
+				"name" : "multiple-select",
+				"stargazers_count" : "288",
+				"forks_count" : "150",
+				"description" : "A jQuery plugin to select multiple elements with checkboxes :)"
+			}, {
+				"name" : "bootstrap-show-password",
+				"stargazers_count" : "32",
+				"forks_count" : "11",
+				"description" : "Show/hide password plugin for twitter bootstrap."
+			}, {
+				"name" : "blog",
+				"stargazers_count" : "13",
+				"forks_count" : "4",
+				"description" : "my blog"
+			}, {
+				"name" : "scutech-redmine",
+				"stargazers_count" : "6",
+				"forks_count" : "3",
+				"description" : "Redmine notification tools for chrome extension."
+			}, {
+				"name" : "multiple-select",
+				"stargazers_count" : "288",
+				"forks_count" : "150",
+				"description" : "A jQuery plugin to select multiple elements with checkboxes :)"
+			}, {
+				"name" : "bootstrap-show-password",
+				"stargazers_count" : "32",
+				"forks_count" : "11",
+				"description" : "Show/hide password plugin for twitter bootstrap."
+			}, {
+				"name" : "blog",
+				"stargazers_count" : "13",
+				"forks_count" : "4",
+				"description" : "my blog"
+			}, {
+				"name" : "scutech-redmine",
+				"stargazers_count" : "6",
+				"forks_count" : "3",
+				"description" : "Redmine notification tools for chrome extension."
+			}];
+
+			$(function() {
+				$('#table').bootstrapTable({
+					data : data
+				});
+			});
+		});
+	</script>
+</body>
+</html>
