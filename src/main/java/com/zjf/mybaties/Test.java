@@ -32,7 +32,6 @@ public class Test
         String statement = "com.zjf.mybaties.UserDao.getUser";
         User user = sqlSession.selectOne(statement, u);
 
-        
 //        String statement = "com.zjf.mybaties.userDao.getAllUsers";
 //        List<user> lstUsers = sqlSession.selectList(statement);
 //        System.out.println(lstUsers.size());

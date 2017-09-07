@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.zjf.db4.DBOper;
+
 public class CharsetEncodingFilter implements Filter {
 
 	@Override
@@ -25,6 +27,8 @@ public class CharsetEncodingFilter implements Filter {
 		arg1.setCharacterEncoding("utf-8");
 		arg1.setContentType("application/json;charset=utf-8");
 		arg2.doFilter(arg0,arg1);
+		
+		DBOper.getInstance().Close();//统一关闭请求的数据源
 		
 	}
 
