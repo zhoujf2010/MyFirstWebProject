@@ -9,33 +9,35 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 import com.zjf.common.SpringContextUtil;
 import com.zjf.test.StringUtil;
 
 public class DBOper
 {
-    //保存后，在同个线程中(同一次请求中)拿到的数据库连接都是同一个。
-    private static ThreadLocal<DBOper> localDs = new ThreadLocal<DBOper>();
+    private static Logger log = Logger.getLogger(DBOper.class);// MethodHandles.lookup().lookupClass());
+
+    // 保存后，在同个线程中(同一次请求中)拿到的数据库连接都是同一个。
+    private static ThreadLocal<List<DBOper>> localDs = new ThreadLocal<List<DBOper>>();
 
     private DBOper(Connection conn) {
         this.conn = conn;
-    }    
+    }
 
     public static DBOper getInstance() {
-        try {
-            DBOper oper = localDs.get();
-            if (oper == null) {
-                DataSource datasource = (DataSource) SpringContextUtil.getContext().getBean("dataSource");
-                Connection conn;
-                conn = datasource.getConnection();
-                oper = new DBOper(conn);
-                localDs.set(oper);
-            }
-            return new DBOper(oper.conn);
+        List<DBOper> operlst = localDs.get();
+        // System.out.println(Thread.currentThread().hashCode() +" " + (operlst!=null&&operlst.size()>0?"OK":"null") + " " + (operlst!=null&&operlst.size()>0?operlst.get(0).hashCode():""));
+        if (operlst == null) {
+            operlst = new ArrayList<DBOper>();
+            localDs.set(operlst);
         }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
+        if (operlst.size() == 0){
+            operlst.add(new DBOper(null));
+            return operlst.get(0);
         }
+        else
+            return new DBOper(operlst.get(0).conn);
     }
 
     public static DBOper getInstance(Connection conn) {
@@ -43,20 +45,50 @@ public class DBOper
     }
 
     private Connection conn = null;
-    
+
     public Connection getConnection() {
+        if (conn == null) {
+            try {
+                DataSource datasource = (DataSource) SpringContextUtil.getContext().getBean("dataSource");
+                conn = datasource.getConnection();
+            }
+            catch (SQLException e) {
+                log.error("获取连接出错", e);
+                throw new RuntimeException(e);
+            }
+        }
         return conn;
     }
 
     public void Close() {
         try {
-            if (conn.isClosed())
+            if (conn == null || conn.isClosed())
                 return;
             conn.close();
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            log.error("关闭连接失败", e);
         }
+        finally {
+            List<DBOper> operlst = localDs.get();
+            if (operlst != null) {
+                for (int i = 0; i < operlst.size(); i++) {
+                    if (operlst.get(i).conn == conn) {
+                        operlst.remove(i);
+                        i--;
+                    }
+                }
+            }
+        }
+    }
+
+    public void CloseAll() {
+        List<DBOper> operlst = localDs.get();
+        if (operlst == null)
+            return;
+        for (DBOper item : operlst)
+            item.Close();
+        operlst.clear();
     }
 
     public List<DataRow> QueryList(String sql, int pageindex, int pageSize, Object... args) {
@@ -74,7 +106,7 @@ public class DBOper
         java.sql.PreparedStatement stat = null;
         ResultSet rst = null;
         try {
-            stat = conn.prepareStatement(sql);
+            stat = getConnection().prepareStatement(sql);
             // 设置参数
             for (int i = 0; i < args.length; i++)
                 stat.setObject(i + 1, args[i]);
@@ -138,7 +170,7 @@ public class DBOper
     public boolean ExecuteSql(String sql, Object... args) {
         java.sql.PreparedStatement stat = null;
         try {
-            stat = conn.prepareStatement(sql);
+            stat = getConnection().prepareStatement(sql);
             // 设置参数
             for (int i = 0; i < args.length; i++)
                 stat.setObject(i + 1, args[i]);

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zjf.db4.DBOper;
+
 @RestController
 @RequestMapping("/test")
 public class restAction
@@ -21,6 +23,10 @@ public class restAction
     @ResponseBody
     @RequestMapping(value = "/add2/{x}/{y}", method = RequestMethod.GET)
     public String add2(@PathVariable("x") int x, @PathVariable("y") int y) {
+        
+        System.out.println(DBOper.getInstance().getConnection().hashCode());
+        System.out.println(DBOper.getInstance().getConnection().hashCode());
+        
         return (x+y)+"";
     }
     
