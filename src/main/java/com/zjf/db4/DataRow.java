@@ -1,6 +1,8 @@
 package com.zjf.db4;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -123,5 +125,101 @@ public class DataRow extends HashMap<String, Object> implements Serializable
     public Object put(String key, Object value) {
         key = keyDeal(key);
         return super.put(key, value);
+    }
+    
+    
+    
+    /**
+     * Get column of mysql type: varchar, char, enum, set, text, tinytext,
+     * mediumtext, longtext
+     */
+    public String getStr(String column) {
+        return ConvertUtil.convertDataType(String.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: int, integer, tinyint(n) n > 1, smallint,
+     * mediumint
+     */
+    public Integer getInt(String column) {
+        return ConvertUtil.convertDataType(Integer.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: bigint
+     */
+    public Long getLong(String column) {
+        return ConvertUtil.convertDataType(Long.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: unsigned bigint
+     */
+    public java.math.BigInteger getBigInteger(String column) {
+        return (java.math.BigInteger) get(column);
+    }
+
+    /**
+     * Get column of mysql type: date, year
+     */
+    public java.util.Date getDate(String column) {
+        return ConvertUtil.convertDataType(Date.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: time
+     */
+    public java.sql.Time getTime(String column) {
+        return (java.sql.Time) get(column);
+    }
+
+    /**
+     * Get column of mysql type: timestamp, datetime
+     */
+    public java.sql.Timestamp getTimestamp(String column) {
+        return (java.sql.Timestamp) get(column);
+    }
+
+    /**
+     * Get column of mysql type: real, double
+     */
+    public Double getDouble(String column) {
+        return ConvertUtil.convertDataType(Double.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: float
+     */
+    public Float getFloat(String column) {
+        return ConvertUtil.convertDataType(Float.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: bit, tinyint(1)
+     */
+    public Boolean getBoolean(String column) {
+        return ConvertUtil.convertDataType(Boolean.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: decimal, numeric
+     */
+    public java.math.BigDecimal getBigDecimal(String column) {
+        return ConvertUtil.convertDataType(BigDecimal.class, get(column));
+    }
+
+    /**
+     * Get column of mysql type: binary, varbinary, tinyblob, blob, mediumblob,
+     * longblob I have not finished the test.
+     */
+    public byte[] getBytes(String column) {
+        return (byte[]) get(column);
+    }
+
+    /**
+     * Get column of any type that extends from Number
+     */
+    public Number getNumber(String column) {
+        return (Number) get(column);
     }
 }
