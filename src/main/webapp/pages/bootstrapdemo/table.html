@@ -460,6 +460,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="button" value="close" onclick="fun()"></input>
 	<script src="../js/jquery-1.10.2.js"></script>
 	<script src="../bootstrap-3.3.7/js/bootstrap.js"></script>
 	<script src="../bootstrap-3.3.7/plugins/dataTables/jquery.dataTables.js"></script>
@@ -470,6 +471,10 @@
 		$(document).ready(function() {
 			$(".dataTables-example").dataTable();
 		});
+	
+	function fun(){
+		parent.fun2("aaaa");
+	}
 	</script>
 </body>
 </html>

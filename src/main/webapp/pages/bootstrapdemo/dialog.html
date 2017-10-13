@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="../bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<input type="button" value="test" onclick="fun()"></input>
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Launch demo modal</button>
+
+
+
+	<script src="../js/jquery-1.10.2.js"></script>
+	<script src="../bootstrap-3.3.7/js/bootstrap.js"></script>
+	<script>
+		function fun() {
+			//alert(1);
+			//$('#myModal').modal({'backdrop':false,'show':true});
+			OpenDialog("新建功能", "table", {
+				width : 800,
+				height:400
+			}, function(dt) {
+				alert(dt);
+			});
+		}
+
+		function OpenDialog(title, url, option, callback) {
+			var bWidth = document.documentElement.clientWidth;
+			var dWidth = document.body.clientWidth;
+			var maxWidth = Math.max(bWidth, dWidth);
+
+			var bHeight = document.documentElement.clientHeight;
+			var dHeight = document.body.clientHeight;
+			var maxHeight = Math.max(bHeight, dHeight);
+
+			var options = $.extend({
+				width : maxWidth-40,
+				height:maxHeight-100
+			}, typeof option == 'object' && option)
+			var width = options.width;
+			var height = options.height;
+			
+			var left = (maxWidth-width)/2;
+			var top  =(maxHeight- height)/2-100;
+			if (top <0)
+				top = 30;
+
+			$('#myModal').remove();
+
+			var myModal = $(document.createElement('div'));
+			myModal.attr("Id", "myModal").attr("role", "document").attr("aria-labelledby", "myModalLabel").addClass("modal");//.addClass("fade");
+
+			var dlg = $(document.createElement('div'));
+			dlg.attr("role", "document").css("width", width + "px").addClass("modal-dialog").css("margin","5px").appendTo(myModal);
+			dlg.css("left",left+"px").css("top",top+"px");
+
+			var content = $(document.createElement('div')).addClass("modal-content").appendTo(dlg);
+
+			var head = $(document.createElement('div')).css("height", "38px").addClass("modal-header").appendTo(content);
+
+			var btn = $(document.createElement('button')).appendTo(head);
+			btn.attr("type", "button").attr("data-dismiss", "modal").attr("aria-label", "Close").addClass("close").css("margin-top", "-8px");
+			$(document.createElement('span')).appendTo(btn).attr("aria-hidden", "true").html("&times;");
+			$(document.createElement('h4')).addClass("modal-title").css("margin-top", "-8px").text(title).appendTo(head);
+
+			var body = $(document.createElement('div')).appendTo(content);
+			body.addClass("modal-body").css("padding", "0px").css("height", height + "px");
+
+			var iframe = $(document.createElement('iframe')).appendTo(body);
+			iframe.css("height", "100%").css("width", "100%").attr("frameborder", "no").attr("border", "0");
+			iframe.attr("src", url);
+
+			$(document.body).append(myModal);
+
+			$('#myModal').modal({
+				'backdrop' : false,
+				'show' : true
+			}).on("hidden.bs.modal", function(dt) {
+				if (callback != null)
+					callback($('#myModal').attr("val"));
+			});
+		}
+
+		function fun2(dt) {
+			$('#myModal').attr("val", dt);
+			$('#myModal').modal('hide');
+		}
+	</script>
+</body>
+</html>
